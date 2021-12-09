@@ -42,7 +42,7 @@ const server = http.createServer(async function(_request, response) {
   // Connect to MariaDB.
   const connection = await openConnection();
 
-  // await createTable(connection);
+  await createTable(connection);
   await insertData(connection);
 
   const [rows] = await readData(connection); 
