@@ -26,7 +26,7 @@ function createTable(connection) {
 
 function insertData(connection) {
   return connection.execute(
-    "INSERT INTO platforminfo (username, departname, created) VALUES ('platform', 'Deploy Friday', '2019-06-17')"
+    "INSERT INTO platforminfo (username, departname, created) VALUES ('platform', 'Deploy Friday', '2021-12-03')"
   );
 }
 
@@ -42,23 +42,21 @@ const server = http.createServer(async function(_request, response) {
   // Connect to MariaDB.
   const connection = await openConnection();
 
-  await createTable(connection);
+  // await createTable(connection);
   await insertData(connection);
 
   const [rows] = await readData(connection); 
 
-  const droppedResult = await dropTable(connection);
+  // const droppedResult = await dropTable(connection);
 
   // Make the output.
-  const outputString = `Hello, World updated again and again!!!! - A simple Node.js template for Platform.sh
+  const outputString = `Hello, World updated again and again!!!! - A simple Node.js template for Shapeblock.com.
 MariaDB Tests:
 * Connect and add row:
   - Row ID (1): ${rows[0].uid}
   - Username (platform): ${rows[0].username}
   - Department (Deploy Friday): ${rows[0].departname}
-  - Created (2021-08-04): ${rows[0].created}
-* Delete row:
-  - Status (0): ${droppedResult[0].warningStatus}`;
+  - Created (2021-08-04): ${rows[0].created}`;
 
   response.writeHead(200, { "Content-Type": "text/plain" });
   response.end(outputString);
